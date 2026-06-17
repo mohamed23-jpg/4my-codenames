@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1A1A1A">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>4M-Y CODENAMES | تحدي الكلمات</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ─────────────────────── TOAST ─────────────────────── -->
+<div id="toast-container"></div>
+
+<!-- ═══════════════════ ONBOARDING ═══════════════════ -->
+<section class="screen" id="screen-onboard">
+  <div class="onboard-card">
+    <div class="onboard-logo">4M-Y 🃏</div>
+    <p class="onboard-sub">تحدي الكلمات — لعب مع الأصدقاء</p>
+    <div class="input-group">
+      <label class="input-label" for="onboard-name">اسمك في اللعبة</label>
+      <input class="input" id="onboard-name" type="text" placeholder="مثال: DOoOla" maxlength="20" autocomplete="off" inputmode="text" onkeydown="if(event.key==='Enter')saveOnboarding()">
+    </div>
+    <div class="input-group">
+      <label class="input-label">اختر صورتك</label>
+      <div class="avatar-options" id="onboard-avatar-opts"></div>
+    </div>
+    <button class="btn btn-yellow btn-lg" onclick="saveOnboarding()" style="width:100%">🚀 ابدأ الآن</button>
+  </div>
+</section>
+
+<!-- ════════════════════ MAIN MENU ════════════════════ -->
+<section class="screen" id="screen-menu">
+  <div class="menu-scatter-bg"></div>
+  <div class="menu-header">
+    <div id="player-hud"></div>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-sm btn-yellow" onclick="openProfileModal()" title="الملف الشخصي">👤</button>
+      <button class="btn btn-sm btn-white" onclick="showSettings()" title="الإعدادات">⚙️</button>
+    </div>
+  </div>
+  <div class="menu-body">
+    <div class="menu-big-logo">4M-Y<br><span class="logo-sub">CODENAMES</span></div>
+    <p class="menu-sub-title">تحدي الكلمات الاجتماعي</p>
+    <div class="menu-btns">
+      <button class="btn btn-yellow btn-lg menu-main-btn" onclick="openCreateRoomModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        إنشاء غرفة
+      </button>
+      <button class="btn btn-black btn-lg menu-main-btn" onclick="openJoinModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        انضم لغرفة
+      </button>
+      <button class="btn btn-white menu-how-btn" onclick="howToPlay()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        كيف تلعب
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ LOBBY ═══════════════════════ -->
+<section class="screen" id="screen-lobby">
+  <div class="lobby-header">
+    <button class="btn btn-sm btn-yellow" onclick="backToMenu()">← رجوع</button>
+    <div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.6);margin-bottom:2px">كود الغرفة</div>
+      <div class="lobby-code-box" id="lobby-code">------</div>
+    </div>
+    <div style="margin-right:auto;display:flex;flex-direction:column;gap:2px">
+      <span id="lobby-mode" style="font-size:.75rem;color:var(--yellow)">---</span>
+      <button class="btn btn-sm btn-white" id="mic-enable-btn" onclick="enableVoice()">🎤 تفعيل الصوت</button>
+    </div>
+  </div>
+
+  <div class="lobby-body">
+    <!-- PLAYERS -->
+    <div class="lobby-section">
+      <div class="section-title">👥 اللاعبون (<span id="lobby-players-count">0</span>)</div>
+      <div id="lobby-player-list"></div>
+    </div>
+
+    <!-- TEAM SELECTION (team mode) -->
+    <div id="team-join-row" style="display:none">
+      <button class="btn btn-red team-btn" data-team="red"  onclick="selectTeam('red')">🔴 الفريق الأحمر</button>
+      <button class="btn btn-blue team-btn" data-team="blue" onclick="selectTeam('blue')">🔵 الفريق الأزرق</button>
+    </div>
+
+    <!-- BOSS SELECTION -->
+    <div class="lobby-section">
+      <div class="section-title">👑 هل تريد أن تكون البوص؟</div>
+      <label class="settings-row" style="cursor:pointer">
+        <span style="font-size:.85rem">أريد أن أكون البوص (سيتم الاختيار عشوائياً)</span>
+        <input type="checkbox" id="want-boss" onchange="setWantBoss(this.checked)">
+      </label>
+      <p style="font-size:.72rem;color:var(--muted)">البوص يعرف مواقع البطاقات ويكتب التلميحات</p>
+    </div>
+
+    <!-- BOSS CANDIDATES (dynamic) -->
+    <div id="boss-candidates-section" class="lobby-section" style="display:none"></div>
+
+    <!-- SETTINGS (host only) -->
+    <div class="lobby-section" id="lobby-settings" style="display:none">
+      <div class="section-title">⚙️ إعدادات الغرفة <button class="btn btn-sm btn-yellow" onclick="applyLobbySettings()">✓ تطبيق</button></div>
+      <div class="input-group" style="margin-bottom:10px">
+        <label class="input-label">نمط اللعب</label>
+        <div class="toggle-wrap">
+          <button class="mode-btn active" data-mode="team"  onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">👥 زوجي</button>
+          <button class="mode-btn"        data-mode="solo"  onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">🎯 فردي</button>
+        </div>
+      </div>
+      <div class="input-group" style="margin-bottom:10px">
+        <label class="input-label">عدد البطاقات</label>
+        <div class="toggle-wrap">
+          <button class="grid-btn"        data-grid="12" onclick="selectToggle(this,'.grid-btn')" disabled style="opacity:.4;cursor:not-allowed">12</button>
+          <button class="grid-btn"        data-grid="16" onclick="selectToggle(this,'.grid-btn')" disabled style="opacity:.4;cursor:not-allowed">16</button>
+          <button class="grid-btn active" data-grid="25" onclick="selectToggle(this,'.grid-btn')">25</button>
+        </div>
+      </div>
+      <div class="input-group" style="margin-bottom:8px">
+        <label class="input-label" for="lb-max">أقصى عدد لاعبين</label>
+        <input class="input" id="lb-max" type="number" min="3" max="20" value="10" inputmode="numeric">
+      </div>
+      <div class="input-group" style="margin-bottom:8px">
+        <label class="input-label" for="lb-pwd">كلمة مرور الغرفة (اختياري)</label>
+        <input class="input" id="lb-pwd" type="text" placeholder="اتركه فارغاً لغرفة مفتوحة" autocomplete="new-password">
+      </div>
+      <label class="settings-row">
+        <span>غرفة عامة (تظهر في الاقتراحات)</span>
+        <input type="checkbox" id="lb-public" checked>
+      </label>
+
+      <!-- Host: mute all voice toggle -->
+      <div id="host-mute-btn" style="display:none;margin-top:8px">
+        <label class="settings-row">
+          <span>🔇 كتم صوت جميع اللاعبين</span>
+          <input type="checkbox" onchange="hostMuteAll(this.checked)">
+        </label>
+      </div>
+    </div>
+
+    <!-- INVITE LINK -->
+    <div class="lobby-section">
+      <div class="section-title">🔗 رابط الدعوة</div>
+      <div class="invite-row">
+        <input class="input" id="lobby-invite-url" readonly style="-webkit-user-select:text;user-select:text">
+        <button class="btn btn-yellow" onclick="copyInvite()">📋 نسخ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="lobby-footer">
+    <button class="btn btn-yellow btn-lg" id="lobby-start-btn" onclick="startGame()" style="display:none;flex:1">
+      🎮 ابدأ اللعبة
+    </button>
+    <span id="lobby-waiting-txt" style="font-size:.8rem;color:var(--muted);flex:1;text-align:center">
+      في انتظار المضيف لبدء اللعبة...
+    </span>
+  </div>
+</section>
+
+<!-- ══════════════════════ GAME ══════════════════════ -->
+<section class="screen" id="screen-game">
+  <!-- Topbar -->
+  <div id="game-topbar" class="game-topbar"></div>
+
+  <!-- Body: right panel + cards -->
+  <div class="game-body">
+    <!-- RIGHT PANEL (RTL: rightmost col) -->
+    <div class="game-right-panel" id="game-right-panel"></div>
+
+    <!-- CARDS COLUMN (RTL: leftmost col) -->
+    <div class="game-cards-col">
+      <!-- Hint bar -->
+      <div id="hint-bar" style="display:none"></div>
+      <!-- Cards grid -->
+      <div id="cards-grid" class="g-25"></div>
+      <!-- Solo players strip -->
+      <div id="solo-strip" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- GAME FOOTER: Boss input + End turn -->
+  <div class="game-footer">
+    <div id="boss-area" style="display:none"></div>
+    <div id="endturn-bar" style="display:none"></div>
+  </div>
+
+  <!-- FAB: event log -->
+  <button class="fab-log" id="fab-log" onclick="toggleLogDrawer()" title="سجل الأحداث">📜</button>
+
+  <!-- FAB: chat -->
+  <button class="fab-chat" id="fab-chat" onclick="openChatPanel()" title="الدردشة">💬</button>
+
+  <!-- Chat Bubbles Layer -->
+  <div id="chat-bubbles-layer" class="chat-bubbles-layer"></div>
+
+  <!-- Event Log Drawer -->
+  <div class="log-drawer-overlay" id="log-overlay" onclick="closeLogDrawer()"></div>
+  <div class="log-drawer" id="log-drawer">
+    <div class="log-drawer-hdr">
+      📜 سجل الأحداث
+      <button class="btn btn-sm btn-white" onclick="closeLogDrawer()">✕ إغلاق</button>
+    </div>
+    <div class="log-drawer-body" id="game-log"></div>
+  </div>
+
+  <!-- Chat Panel -->
+  <div class="chat-panel-overlay" id="chat-panel-overlay" onclick="closeChatPanel()"></div>
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-panel-hdr">
+      <span>💬 الدردشة</span>
+      <button class="btn btn-sm btn-white" onclick="closeChatPanel()">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input-row">
+      <input class="chat-inp" id="chat-input" maxlength="40" placeholder="رسالة (40 حرف كحد أقصى)..." autocomplete="off" onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="btn btn-yellow btn-sm" onclick="sendChat()">↩</button>
+    </div>
+  </div>
+
+  <!-- In-game settings panel -->
+  <div id="ig-settings-panel"></div>
+</section>
+
+<!-- ═══════════════════ GAME OVER ══════════════════ -->
+<section class="screen" id="screen-gameover">
+  <div id="gameover-box"></div>
+</section>
+
+<!-- ══════════════════ HOW TO PLAY ══════════════════ -->
+<section class="screen" id="screen-howto">
+  <div class="page-header">
+    <button class="btn btn-sm btn-yellow" onclick="showMainMenu()">← رجوع</button>
+    <span class="page-title">كيف تلعب؟</span>
+  </div>
+  <div class="page-body">
+
+    <div class="how-section hs-yellow">
+      <div class="hs-head">
+        <div class="hs-icon" style="background:#FFE046;color:#1A1A1A">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <h3>الهدف</h3>
+      </div>
+      <p>اكشف جميع بطاقات فريقك قبل الفريق الآخر — وتجنّب البطاقة السوداء الفتّاكة!</p>
+    </div>
+
+    <div class="how-section hs-red">
+      <div class="hs-head">
+        <div class="hs-icon" style="background:#EF4444;color:#fff">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>الوضع الزوجي</h3>
+      </div>
+      <ul class="hs-list">
+        <li><span class="hs-dot" style="background:#EF4444"></span> فريق أحمر وفريق أزرق — لكل فريق بوص.</li>
+        <li><span class="hs-dot" style="background:#8B5CF6"></span> البوص يرى ألوان البطاقات ويكتب تلميحاً: كلمة + رقم.</li>
+        <li><span class="hs-dot" style="background:#22C55E"></span> اللاعبون يخمنون. إصابة بطاقة خصم أو محايدة = انتهاء الدور.</li>
+        <li><span class="hs-dot" style="background:#1A1A1A"></span> البطاقة السوداء = خسارة فورية للفريق!</li>
+      </ul>
+    </div>
+
+    <div class="how-section hs-blue">
+      <div class="hs-head">
+        <div class="hs-icon" style="background:#3B82F6;color:#fff">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>الوضع الفردي</h3>
+      </div>
+      <ul class="hs-list">
+        <li><span class="hs-dot" style="background:#3B82F6"></span> بوص واحد + عدة لاعبين يتنافسون على النقاط.</li>
+        <li><span class="hs-dot" style="background:#8B5CF6"></span> البوص يختار حتى 3 بطاقات ويكتب تلميحاً واحداً لها.</li>
+        <li><span class="hs-dot" style="background:#22C55E"></span> إصابة = نقطة ✓ — خطأ = حجب جولة واحدة ⏸</li>
+        <li><span class="hs-dot" style="background:#1A1A1A"></span> البطاقة السوداء = إقصاء فوري من اللعبة!</li>
+      </ul>
+    </div>
+
+    <div class="how-section hs-green">
+      <div class="hs-head">
+        <div class="hs-icon" style="background:#22C55E;color:#fff">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </div>
+        <h3>التلميحات والنقاط</h3>
+      </div>
+      <ul class="hs-list">
+        <li><span class="hs-dot" style="background:#FFE046"></span> التلميح: كلمة واحدة فقط + رقم (1–9) يمثّل عدد البطاقات.</li>
+        <li><span class="hs-dot" style="background:#EF4444"></span> ممنوع استخدام كلمة موجودة على البطاقات.</li>
+        <li><span class="hs-dot" style="background:#22C55E"></span> البوص في الوضع الفردي يأخذ نصف مجموع نقاط الفريق.</li>
+      </ul>
+    </div>
+
+    <div class="how-section hs-dark">
+      <div class="hs-head">
+        <div class="hs-icon" style="background:#1A1A1A;color:#FFE046">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <h3>الصوت والدردشة</h3>
+      </div>
+      <ul class="hs-list">
+        <li><span class="hs-dot" style="background:#3B82F6"></span> اضغط "تفعيل الصوت" في الغرفة للحديث مع الآخرين.</li>
+        <li><span class="hs-dot" style="background:#22C55E"></span> المستمعون يسمعون بدون الحاجة لمنح إذن الميكروفون.</li>
+        <li><span class="hs-dot" style="background:#FFE046"></span> زر 💬 يفتح لوحة الدردشة النصية أثناء اللعبة.</li>
+        <li><span class="hs-dot" style="background:#EF4444"></span> المضيف يتحكم في تفعيل/إيقاف الصوت والدردشة للجميع.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════ SETTINGS ════════════════════ -->
+<section class="screen" id="screen-settings">
+  <div class="page-header">
+    <button class="btn btn-sm btn-yellow" onclick="showMainMenu()">← رجوع</button>
+    <span class="page-title">⚙️ الإعدادات</span>
+  </div>
+  <div class="page-body">
+    <div class="lobby-section">
+      <div class="section-title">🔊 الصوت</div>
+      <div class="settings-row">
+        <span>تفعيل المؤثرات الصوتية</span>
+        <label class="toggle-switch"><input type="checkbox" id="sfx-toggle" onchange="Audio.setSfxEnabled(this.checked)"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="settings-row">
+        <span>مستوى الصوت</span>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="range" id="sfx-vol" min="0" max="100" value="100" style="width:100px;height:4px" oninput="Audio.setSfxVolume(this.value/100);document.getElementById('sfx-vol-val').textContent=this.value+'%'">
+          <span id="sfx-vol-val" style="font-size:.8rem;min-width:36px">100%</span>
+        </div>
+      </div>
+    </div>
+    <div class="lobby-section">
+      <div class="section-title">⚠️ الحساب</div>
+      <button class="btn btn-red" onclick="resetAccount()">🗑️ حذف البيانات وإعادة الضبط</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ MODALS ══════════════════════ -->
+
+<!-- Create Room -->
+<div class="modal-overlay" id="modal-create">
+  <div class="modal-box">
+    <div class="modal-title">🏠 إنشاء غرفة جديدة</div>
+    <div class="input-group" style="margin-bottom:12px">
+      <label class="input-label">نمط اللعب</label>
+      <div class="toggle-wrap">
+        <button class="mode-btn active" data-mode="team" onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">👥 زوجي</button>
+        <button class="mode-btn"        data-mode="solo" onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">🎯 فردي</button>
+      </div>
+    </div>
+    <div class="input-group" style="margin-bottom:12px">
+      <label class="input-label">عدد البطاقات</label>
+      <div class="toggle-wrap">
+        <button class="grid-btn"        data-grid="12" onclick="selectToggle(this,'.grid-btn')" disabled style="opacity:.4;cursor:not-allowed">12</button>
+        <button class="grid-btn"        data-grid="16" onclick="selectToggle(this,'.grid-btn')" disabled style="opacity:.4;cursor:not-allowed">16</button>
+        <button class="grid-btn active" data-grid="25" onclick="selectToggle(this,'.grid-btn')">25</button>
+      </div>
+    </div>
+    <div class="input-group" style="margin-bottom:12px">
+      <label class="input-label" for="cr-max">أقصى عدد لاعبين</label>
+      <input class="input" id="cr-max" type="number" min="3" max="20" value="10" inputmode="numeric">
+    </div>
+    <div class="input-group" style="margin-bottom:12px">
+      <label class="input-label" for="cr-pwd">كلمة مرور (اختياري)</label>
+      <input class="input" id="cr-pwd" type="text" placeholder="اتركه فارغاً لغرفة مفتوحة" autocomplete="new-password">
+    </div>
+    <label class="settings-row" style="margin-bottom:14px">
+      <span>الغرفة عامة (تظهر للجميع)</span>
+      <input type="checkbox" id="cr-public" checked>
+    </label>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-yellow btn-lg" onclick="doCreateRoom()" style="flex:1">✓ إنشاء</button>
+      <button class="btn btn-white"         onclick="closeCreateRoomModal()">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- Join Room -->
+<div class="modal-overlay" id="modal-join">
+  <div class="modal-box join-modal-box">
+    <!-- Tabs -->
+    <div class="join-tabs">
+      <button class="join-tab jt-active" id="tab-btn-active" onclick="switchJoinTab('active')">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg>
+        الغرف النشطة
+      </button>
+      <button class="join-tab" id="tab-btn-private" onclick="switchJoinTab('private')">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        غرفة خاصة
+      </button>
+    </div>
+
+    <!-- Panel: Active Rooms -->
+    <div id="join-panel-active" style="padding:14px">
+      <div id="room-list" style="max-height:260px;overflow-y:auto;margin-bottom:10px">
+        <div class="rooms-loading"><div class="spinner"></div></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-gray btn-sm" onclick="loadPublicRooms()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9A9 9 0 0121 12M20.5 15A9 9 0 013 12"/></svg>
+          تحديث
+        </button>
+        <button class="btn btn-white btn-sm" onclick="closeJoinModal()">✕</button>
+      </div>
+    </div>
+
+    <!-- Panel: Private Room -->
+    <div id="join-panel-private" style="padding:14px;display:none">
+      <div class="input-group" style="margin-bottom:10px">
+        <label class="input-label">كود الغرفة</label>
+        <input class="input" id="join-code" type="text" placeholder="مثال: ABCD12" maxlength="6" autocomplete="off" inputmode="text" style="letter-spacing:.1em;text-transform:uppercase;font-weight:900;text-align:center" onkeydown="if(event.key==='Enter')joinFromModalCode()">
+      </div>
+      <div class="input-group" style="margin-bottom:14px">
+        <label class="input-label">كلمة مرور (إن وجدت)</label>
+        <input class="input" id="join-pwd" type="password" placeholder="اتركه فارغاً إذا لم يكن هناك" autocomplete="current-password">
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-black btn-lg" onclick="joinFromModalCode()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13 12H3"/></svg>
+          انضم
+        </button>
+        <button class="btn btn-white" onclick="closeJoinModal()">✕</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Password Gate -->
+<div class="modal-overlay" id="modal-pwdgate">
+  <div class="modal-box">
+    <div class="modal-title">🔒 كلمة المرور</div>
+    <div class="pwdgate-info" id="pwdgate-code">------</div>
+    <div class="input-group" style="margin-bottom:12px">
+      <label class="input-label" for="pwdgate-input">أدخل كلمة مرور الغرفة</label>
+      <input class="input" id="pwdgate-input" type="password" placeholder="كلمة المرور..." autocomplete="current-password" onkeydown="if(event.key==='Enter')tryPwdGateJoin()">
+    </div>
+    <div class="pwdgate-err" id="pwdgate-error" style="display:none">❌ كلمة المرور خاطئة، حاول مرة أخرى</div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-yellow btn-lg" onclick="tryPwdGateJoin()" style="flex:1">✓ دخول</button>
+      <button class="btn btn-white"         onclick="closePwdGate()">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- Profile -->
+<div class="modal-overlay" id="modal-profile">
+  <div class="modal-box">
+    <div class="modal-title">👤 ملفي الشخصي</div>
+    <div id="profile-modal-body"></div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-yellow btn-lg" onclick="saveProfileEdits()" style="flex:1">💾 حفظ</button>
+      <button class="btn btn-white"         onclick="document.getElementById('modal-profile').classList.remove('open')">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ SCRIPTS ════════════════════ -->
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+<script src="js/words.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/voice.js"></script>
+<script src="js/p2p.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

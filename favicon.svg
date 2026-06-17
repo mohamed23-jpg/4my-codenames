@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- الكارت الخلفي (الغموض): مائل بزاوية عشان يدي حركة، بلون بنفسجي غامق مصمت -->
+  <g transform="rotate(-15 16 16)">
+    <rect x="6" y="5" width="16" height="22" fill="#000000" />
+    <rect x="4" y="3" width="16" height="22" fill="#7AA2F7" stroke="#000000" stroke-width="2" />
+    <!-- خطوط وهمية كأنه ظهر كارت لعبة -->
+    <path d="M8 8 L16 16 M16 8 L8 16" stroke="#000000" stroke-width="1.5" stroke-dasharray="2 2" />
+  </g>
+
+  <!-- الكارت الأمامي الأساسي: نيو-بروتاليزم صريح بظل أسود ضخم وكبير -->
+  <!-- الظل الثقيل -->
+  <rect x="13" y="9" width="16" height="21" fill="#000000" />
+  <!-- الكارت بلون برتقالي ناري/أحمر حاد عشان يشد العين في المتصفح -->
+  <rect x="10" y="6" width="16" height="21" fill="#FF5733" stroke="#000000" stroke-width="2" />
+  
+  <!-- اللوجو وحقوقك 4M-Y متمركزة بقوة في الكارت الأمامي -->
+  <!-- عملت خلفية بيضاء صغيرة تحت الحروف عشان تنطق وتظهر جداً في المقاس الصغير -->
+  <rect x="12" y="11" width="12" height="7" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+  
+  <text x="18" y="17" 
+        font-family="Arial Black, Impact, sans-serif" 
+        font-size="5.5" 
+        font-weight="900" 
+        fill="#000000" 
+        text-anchor="middle">4M-Y</text>
+
+  <!-- نقطة صغيرة تحت زي كروت الـ Spy أو القنبلة -->
+  <circle cx="18" cy="23" r="1.5" fill="#000000" />
+</svg>
