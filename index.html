@@ -22,7 +22,7 @@
 <!-- ═══════════════════ ONBOARDING ═══════════════════ -->
 <section class="screen" id="screen-onboard">
   <div class="onboard-card">
-    <div class="onboard-logo">4M-Y 🃏</div>
+    <div class="onboard-logo">4M-Y <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-6px"><rect x="2" y="3" width="20" height="18" rx="3"/><path d="M12 7l1.5 3H17l-2.5 2 1 3-3.5-2.5L8.5 15l1-3L7 10h3.5z"/></svg></div>
     <p class="onboard-sub">تحدي الكلمات — لعب مع الأصدقاء</p>
     <div class="input-group">
       <label class="input-label" for="onboard-name">اسمك في اللعبة</label>
@@ -32,7 +32,10 @@
       <label class="input-label">اختر صورتك</label>
       <div class="avatar-options" id="onboard-avatar-opts"></div>
     </div>
-    <button class="btn btn-yellow btn-lg" onclick="saveOnboarding()" style="width:100%">🚀 ابدأ الآن</button>
+    <button class="btn btn-yellow btn-lg" onclick="saveOnboarding()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:7px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></svg>
+      ابدأ الآن
+    </button>
   </div>
 </section>
 
@@ -42,8 +45,12 @@
   <div class="menu-header">
     <div id="player-hud"></div>
     <div style="display:flex;gap:6px">
-      <button class="btn btn-sm btn-yellow" onclick="openProfileModal()" title="الملف الشخصي">👤</button>
-      <button class="btn btn-sm btn-white" onclick="showSettings()" title="الإعدادات">⚙️</button>
+      <button class="btn btn-sm btn-yellow" onclick="openProfileModal()" title="الملف الشخصي">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="btn btn-sm btn-white" onclick="showSettings()" title="الإعدادات">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </button>
     </div>
   </div>
   <div class="menu-body">
@@ -64,7 +71,39 @@
       </button>
     </div>
   </div>
+  <footer class="menu-footer">
+    <a href="https://t.me/ttaeo" target="_blank" rel="noopener" class="footer-tg-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 100 12a12 12 0 0011.944-12zm4.97 4.12l-1.994 9.403c-.15.664-.54.824-1.09.513l-3-2.21-1.448 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.332-.373-.119l-6.869 4.326-2.962-.924c-.643-.204-.658-.643.136-.953l11.564-4.461c.535-.194 1.003.13.868.812z"/></svg>
+      @ttaeo
+    </a>
+    <button class="footer-dev-btn" onclick="openDevCard()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      المطوّر
+    </button>
+  </footer>
 </section>
+
+<!-- ════════════════════ DEV CARD MODAL ════════════════════ -->
+<div class="modal-overlay" id="modal-devcard" onclick="if(event.target===this)closeDevCard()">
+  <div class="modal-box devcard-box">
+    <button class="modal-close" onclick="closeDevCard()">✕</button>
+    <div class="devcard-avatar">M</div>
+    <div class="devcard-name">M. Adel Kandeel</div>
+    <div class="devcard-age">17 سنة · مصر · المنوفية</div>
+    <div class="devcard-city" style="color:var(--blue);font-weight:700;font-size:.95rem;letter-spacing:.04em">سنجرج</div>
+    <div class="devcard-links">
+      <a href="https://t.me/ttaeo" target="_blank" rel="noopener" class="devcard-link devcard-tg">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 100 12a12 12 0 0011.944-12zm4.97 4.12l-1.994 9.403c-.15.664-.54.824-1.09.513l-3-2.21-1.448 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.332-.373-.119l-6.869 4.326-2.962-.924c-.643-.204-.658-.643.136-.953l11.564-4.461c.535-.194 1.003.13.868.812z"/></svg>
+        @ttaeo
+      </a>
+      <a href="tel:+201010250078" class="devcard-link devcard-phone">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+        +20 101 025 0078
+      </a>
+    </div>
+    <div class="devcard-badge">مطوّر لعبة 4M-Y CODENAMES</div>
+  </div>
+</div>
 
 <!-- ═══════════════════════ LOBBY ═══════════════════════ -->
 <section class="screen" id="screen-lobby">
@@ -76,26 +115,41 @@
     </div>
     <div style="margin-right:auto;display:flex;flex-direction:column;gap:2px">
       <span id="lobby-mode" style="font-size:.75rem;color:var(--yellow)">---</span>
-      <button class="btn btn-sm btn-white" id="mic-enable-btn" onclick="enableVoice()">🎤 تفعيل الصوت</button>
+      <button class="btn btn-sm btn-white" id="mic-enable-btn" onclick="enableVoice()" style="display:flex;align-items:center;gap:5px">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3M9 22h6"/></svg>
+        تفعيل الصوت
+      </button>
     </div>
   </div>
 
   <div class="lobby-body">
     <!-- PLAYERS -->
     <div class="lobby-section">
-      <div class="section-title">👥 اللاعبون (<span id="lobby-players-count">0</span>)</div>
+      <div class="section-title" style="display:flex;align-items:center;gap:6px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        اللاعبون (<span id="lobby-players-count">0</span>)
+      </div>
       <div id="lobby-player-list"></div>
     </div>
 
     <!-- TEAM SELECTION (team mode) -->
     <div id="team-join-row" style="display:none">
-      <button class="btn btn-red team-btn" data-team="red"  onclick="selectTeam('red')">🔴 الفريق الأحمر</button>
-      <button class="btn btn-blue team-btn" data-team="blue" onclick="selectTeam('blue')">🔵 الفريق الأزرق</button>
+      <button class="btn btn-red team-btn" data-team="red"  onclick="selectTeam('red')">
+        <svg width="11" height="11" viewBox="0 0 11 11"><circle cx="5.5" cy="5.5" r="5" fill="#EF4444"/></svg>
+        الفريق الأحمر
+      </button>
+      <button class="btn btn-blue team-btn" data-team="blue" onclick="selectTeam('blue')">
+        <svg width="11" height="11" viewBox="0 0 11 11"><circle cx="5.5" cy="5.5" r="5" fill="#3B82F6"/></svg>
+        الفريق الأزرق
+      </button>
     </div>
 
     <!-- BOSS SELECTION -->
     <div class="lobby-section">
-      <div class="section-title">👑 هل تريد أن تكون البوص؟</div>
+      <div class="section-title" style="display:flex;align-items:center;gap:6px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M5 16L3 7l5 4 4-7 4 7 5-4-2 9H5zm0 2h14v2H5v-2z"/></svg>
+        هل تريد أن تكون البوص؟
+      </div>
       <label class="settings-row" style="cursor:pointer">
         <span style="font-size:.85rem">أريد أن أكون البوص (سيتم الاختيار عشوائياً)</span>
         <input type="checkbox" id="want-boss" onchange="setWantBoss(this.checked)">
@@ -108,12 +162,22 @@
 
     <!-- SETTINGS (host only) -->
     <div class="lobby-section" id="lobby-settings" style="display:none">
-      <div class="section-title">⚙️ إعدادات الغرفة <button class="btn btn-sm btn-yellow" onclick="applyLobbySettings()">✓ تطبيق</button></div>
+      <div class="section-title" style="display:flex;align-items:center;gap:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        إعدادات الغرفة
+        <button class="btn btn-sm btn-yellow" onclick="applyLobbySettings()" style="margin-right:auto">✓ تطبيق</button>
+      </div>
       <div class="input-group" style="margin-bottom:10px">
         <label class="input-label">نمط اللعب</label>
         <div class="toggle-wrap">
-          <button class="mode-btn active" data-mode="team"  onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">👥 زوجي</button>
-          <button class="mode-btn"        data-mode="solo"  onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">🎯 فردي</button>
+          <button class="mode-btn active" data-mode="team"  onclick="selectToggle(this,'.mode-btn');onModeToggle(this)" style="display:flex;align-items:center;gap:5px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            زوجي
+          </button>
+          <button class="mode-btn" data-mode="solo" onclick="selectToggle(this,'.mode-btn');onModeToggle(this)" style="display:flex;align-items:center;gap:5px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+            فردي
+          </button>
         </div>
       </div>
       <div class="input-group" style="margin-bottom:10px">
@@ -140,7 +204,10 @@
       <!-- Host: mute all voice toggle -->
       <div id="host-mute-btn" style="display:none;margin-top:8px">
         <label class="settings-row">
-          <span>🔇 كتم صوت جميع اللاعبين</span>
+          <span style="display:flex;align-items:center;gap:6px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            كتم صوت جميع اللاعبين
+          </span>
           <input type="checkbox" onchange="hostMuteAll(this.checked)">
         </label>
       </div>
@@ -148,18 +215,25 @@
 
     <!-- INVITE LINK -->
     <div class="lobby-section">
-      <div class="section-title">🔗 رابط الدعوة</div>
+      <div class="section-title" style="display:flex;align-items:center;gap:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        رابط الدعوة
+      </div>
       <div class="invite-row">
         <input class="input" id="lobby-invite-url" readonly style="-webkit-user-select:text;user-select:text">
-        <button class="btn btn-yellow" onclick="copyInvite()">📋 نسخ</button>
+        <button class="btn btn-yellow" onclick="copyInvite()" style="display:flex;align-items:center;gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+          نسخ
+        </button>
       </div>
     </div>
   </div>
 
   <!-- FOOTER -->
   <div class="lobby-footer">
-    <button class="btn btn-yellow btn-lg" id="lobby-start-btn" onclick="startGame()" style="display:none;flex:1">
-      🎮 ابدأ اللعبة
+    <button class="btn btn-yellow btn-lg" id="lobby-start-btn" onclick="startGame()" style="display:none;flex:1;gap:7px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+      ابدأ اللعبة
     </button>
     <span id="lobby-waiting-txt" style="font-size:.8rem;color:var(--muted);flex:1;text-align:center">
       في انتظار المضيف لبدء اللعبة...
@@ -195,10 +269,14 @@
   </div>
 
   <!-- FAB: event log -->
-  <button class="fab-log" id="fab-log" onclick="toggleLogDrawer()" title="سجل الأحداث">📜</button>
+  <button class="fab-log" id="fab-log" onclick="toggleLogDrawer()" title="سجل الأحداث">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+  </button>
 
   <!-- FAB: chat -->
-  <button class="fab-chat" id="fab-chat" onclick="openChatPanel()" title="الدردشة">💬</button>
+  <button class="fab-chat" id="fab-chat" onclick="openChatPanel()" title="الدردشة">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  </button>
 
   <!-- Chat Bubbles Layer -->
   <div id="chat-bubbles-layer" class="chat-bubbles-layer"></div>
@@ -207,7 +285,10 @@
   <div class="log-drawer-overlay" id="log-overlay" onclick="closeLogDrawer()"></div>
   <div class="log-drawer" id="log-drawer">
     <div class="log-drawer-hdr">
-      📜 سجل الأحداث
+      <span style="display:flex;align-items:center;gap:7px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        سجل الأحداث
+      </span>
       <button class="btn btn-sm btn-white" onclick="closeLogDrawer()">✕ إغلاق</button>
     </div>
     <div class="log-drawer-body" id="game-log"></div>
@@ -217,7 +298,10 @@
   <div class="chat-panel-overlay" id="chat-panel-overlay" onclick="closeChatPanel()"></div>
   <div class="chat-panel" id="chat-panel">
     <div class="chat-panel-hdr">
-      <span>💬 الدردشة</span>
+      <span style="display:flex;align-items:center;gap:7px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        الدردشة
+      </span>
       <button class="btn btn-sm btn-white" onclick="closeChatPanel()">✕</button>
     </div>
     <div class="chat-messages" id="chat-messages"></div>
@@ -308,7 +392,7 @@
       <ul class="hs-list">
         <li><span class="hs-dot" style="background:#3B82F6"></span> اضغط "تفعيل الصوت" في الغرفة للحديث مع الآخرين.</li>
         <li><span class="hs-dot" style="background:#22C55E"></span> المستمعون يسمعون بدون الحاجة لمنح إذن الميكروفون.</li>
-        <li><span class="hs-dot" style="background:#FFE046"></span> زر 💬 يفتح لوحة الدردشة النصية أثناء اللعبة.</li>
+        <li><span class="hs-dot" style="background:#FFE046"></span> زر <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> يفتح لوحة الدردشة النصية أثناء اللعبة.</li>
         <li><span class="hs-dot" style="background:#EF4444"></span> المضيف يتحكم في تفعيل/إيقاف الصوت والدردشة للجميع.</li>
       </ul>
     </div>
@@ -320,11 +404,17 @@
 <section class="screen" id="screen-settings">
   <div class="page-header">
     <button class="btn btn-sm btn-yellow" onclick="showMainMenu()">← رجوع</button>
-    <span class="page-title">⚙️ الإعدادات</span>
+    <span class="page-title" style="display:flex;align-items:center;gap:6px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      الإعدادات
+    </span>
   </div>
   <div class="page-body">
     <div class="lobby-section">
-      <div class="section-title">🔊 الصوت</div>
+      <div class="section-title" style="display:flex;align-items:center;gap:6px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+        الصوت
+      </div>
       <div class="settings-row">
         <span>تفعيل المؤثرات الصوتية</span>
         <label class="toggle-switch"><input type="checkbox" id="sfx-toggle" onchange="Audio.setSfxEnabled(this.checked)"><span class="toggle-slider"></span></label>
@@ -338,8 +428,14 @@
       </div>
     </div>
     <div class="lobby-section">
-      <div class="section-title">⚠️ الحساب</div>
-      <button class="btn btn-red" onclick="resetAccount()">🗑️ حذف البيانات وإعادة الضبط</button>
+      <div class="section-title" style="display:flex;align-items:center;gap:6px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        الحساب
+      </div>
+      <button class="btn btn-red" onclick="resetAccount()" style="display:flex;align-items:center;gap:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        حذف البيانات وإعادة الضبط
+      </button>
     </div>
   </div>
 </section>
@@ -349,12 +445,21 @@
 <!-- Create Room -->
 <div class="modal-overlay" id="modal-create">
   <div class="modal-box">
-    <div class="modal-title">🏠 إنشاء غرفة جديدة</div>
+    <div class="modal-title" style="display:flex;align-items:center;gap:7px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      إنشاء غرفة جديدة
+    </div>
     <div class="input-group" style="margin-bottom:12px">
       <label class="input-label">نمط اللعب</label>
       <div class="toggle-wrap">
-        <button class="mode-btn active" data-mode="team" onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">👥 زوجي</button>
-        <button class="mode-btn"        data-mode="solo" onclick="selectToggle(this,'.mode-btn');onModeToggle(this)">🎯 فردي</button>
+        <button class="mode-btn active" data-mode="team" onclick="selectToggle(this,'.mode-btn');onModeToggle(this)" style="display:flex;align-items:center;gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          زوجي
+        </button>
+        <button class="mode-btn" data-mode="solo" onclick="selectToggle(this,'.mode-btn');onModeToggle(this)" style="display:flex;align-items:center;gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+          فردي
+        </button>
       </div>
     </div>
     <div class="input-group" style="margin-bottom:12px">
@@ -437,13 +542,19 @@
 <!-- Password Gate -->
 <div class="modal-overlay" id="modal-pwdgate">
   <div class="modal-box">
-    <div class="modal-title">🔒 كلمة المرور</div>
+    <div class="modal-title" style="display:flex;align-items:center;gap:7px">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      كلمة المرور
+    </div>
     <div class="pwdgate-info" id="pwdgate-code">------</div>
     <div class="input-group" style="margin-bottom:12px">
       <label class="input-label" for="pwdgate-input">أدخل كلمة مرور الغرفة</label>
       <input class="input" id="pwdgate-input" type="password" placeholder="كلمة المرور..." autocomplete="current-password" onkeydown="if(event.key==='Enter')tryPwdGateJoin()">
     </div>
-    <div class="pwdgate-err" id="pwdgate-error" style="display:none">❌ كلمة المرور خاطئة، حاول مرة أخرى</div>
+    <div class="pwdgate-err" id="pwdgate-error" style="display:none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      كلمة المرور خاطئة، حاول مرة أخرى
+    </div>
     <div style="display:flex;gap:8px;margin-top:12px">
       <button class="btn btn-yellow btn-lg" onclick="tryPwdGateJoin()" style="flex:1">✓ دخول</button>
       <button class="btn btn-white"         onclick="closePwdGate()">✕</button>
@@ -454,11 +565,17 @@
 <!-- Profile -->
 <div class="modal-overlay" id="modal-profile">
   <div class="modal-box">
-    <div class="modal-title">👤 ملفي الشخصي</div>
+    <div class="modal-title" style="display:flex;align-items:center;gap:7px">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      ملفي الشخصي
+    </div>
     <div id="profile-modal-body"></div>
     <div style="display:flex;gap:8px;margin-top:14px">
-      <button class="btn btn-yellow btn-lg" onclick="saveProfileEdits()" style="flex:1">💾 حفظ</button>
-      <button class="btn btn-white"         onclick="document.getElementById('modal-profile').classList.remove('open')">✕</button>
+      <button class="btn btn-yellow btn-lg" onclick="saveProfileEdits()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        حفظ
+      </button>
+      <button class="btn btn-white" onclick="document.getElementById('modal-profile').classList.remove('open')">✕</button>
     </div>
   </div>
 </div>
