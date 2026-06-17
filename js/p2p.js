@@ -27,7 +27,7 @@ const P2P = (() => {
 
   function getHostPeerId(code) { return '4mycn-' + code + '-host'; }
   function getGuestPeerId(code, name) {
-    const safe = name.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g, '').substring(0, 6) || 'g';
+    const safe = name.replace(/[^a-zA-Z0-9]/g, '').substring(0, 6) || 'g';
     const rand = Math.random().toString(36).substring(2, 6);
     return '4mycn-' + code + '-' + safe + '-' + rand;
   }
@@ -39,7 +39,7 @@ const P2P = (() => {
     const peerId = getHostPeerId(roomCode);
     myId = peerId;
 
-    peer = new Peer(peerId, { debug: 0 });
+    peer = new Peer(peerId, { debug: 0, config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }] } });
 
     peer.on('open', () => {
       if (onConnectedCallback) onConnectedCallback({ roomCode, isHost: true });
@@ -67,7 +67,7 @@ const P2P = (() => {
     const peerId = getGuestPeerId(roomCode, (playerInfo && playerInfo.name) || 'guest');
     myId = peerId;
 
-    peer = new Peer(peerId, { debug: 0 });
+    peer = new Peer(peerId, { debug: 0, config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }] } });
 
     peer.on('open', () => {
       const hostId = getHostPeerId(roomCode);
