@@ -27,7 +27,18 @@ const AVATARS = [
 
 const LEVEL_XP    = [0,100,250,500,1000,2000,4000,8000,16000,32000];
 const LEVEL_NAMES = ['مبتدئ','متعلم','محترف','خبير','أسطورة','بطل','إمبراطور','أسطوري','خارق','نجم الكون'];
-const LEVEL_EMOJI = ['🌱','📖','⚔️','🛡️','✨','🏆','👑','🌟','💎','🌌'];
+const LEVEL_EMOJI = [
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px"><path d="M12 22V12"/><path d="M12 12C10 9 7 8 6 5c2.5-.5 5 1 6 7z"/><path d="M12 12c2-2 5-3 6-6-2.5-.5-5 1-6 6z"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="#f97316" style="vertical-align:-2px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-2px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" style="vertical-align:-2px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" style="vertical-align:-2px"><path d="M7 2v2H3v4c0 2.2 1.8 4 4 4h.3c.7 2 2.5 3.5 4.7 3.9V18h-3v2h8v-2h-3v-2.1c2.2-.4 4-1.9 4.7-3.9H19c2.2 0 4-1.8 4-4V4h-4V2H7zM7 10V6H5v4c0 1.1.9 2 2 2zm10 0c1.1 0 2-.9 2-2V6h-2v4z"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="#ef4444" style="vertical-align:-2px"><path d="M5 16L3 7l5 4 4-7 4 7 5-4-2 9H5zm0 2h14v2H5v-2z"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="#3b82f6" style="vertical-align:-2px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px"><path d="M12 2L2 9l10 13L22 9z"/><path d="M2 9h20"/></svg>`,
+  `<svg width="13" height="13" viewBox="0 0 24 24" fill="#7c3aed" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5" fill="#c084fc"/><circle cx="12" cy="12" r="2" fill="#ede9fe"/></svg>`,
+];
 
 /* ── SVG icon helpers ── */
 const SVG = {
@@ -48,6 +59,12 @@ const SVG = {
   mic:     `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3M9 22h6"/></svg>`,
   micOff:  `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3M9 22h6M3 3l18 18"/></svg>`,
   speaker: `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>`,
+  muteBtn: `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`,
+  volBtn:  `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>`,
+  gear:    `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
+  chat:    `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+  send:    `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`,
+  sparkle: `<svg viewBox="0 0 24 24" width="17" height="17" fill="#F59E0B" style="vertical-align:-3px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>`,
 };
 
 // ══════════════════════════════════════════════════════
@@ -255,6 +272,7 @@ function openCreateRoomModal() { Audio.play('click'); document.getElementById('m
 function closeCreateRoomModal(){ document.getElementById('modal-create').classList.remove('open'); }
 
 function doCreateRoom(){
+  if(_checkDuplicateTab()){toast('أنت موجود بالفعل في غرفة على تبويب آخر!','error');return;}
   const mode=document.querySelector('#modal-create .mode-btn.active')?.dataset.mode||'team';
   const gridSize=parseInt(document.querySelector('#modal-create .grid-btn.active')?.dataset.grid||'25');
   const maxP=parseInt(document.getElementById('cr-max')?.value||'10');
@@ -267,6 +285,7 @@ function doCreateRoom(){
     roomState.code=info.roomCode; roomState.isHost=true;
     const me={...buildPlayerInfo(),peerId:P2P.getMyId(),isHost:true,team:null,wantBoss:false,micMuted:true};
     roomState.players=[me];
+    _enterRoom();
     showLobby();
   });
   P2P.onError(e=>toast('خطأ في الاتصال: '+e,'error'));
@@ -304,6 +323,7 @@ function joinRoomFromList(room){
   else _doJoin(room.code,'');
 }
 function _doJoin(code,password=''){
+  if(_checkDuplicateTab()){toast('أنت موجود بالفعل في غرفة على تبويب آخر!','error');return;}
   toast('جاري الانضمام إلى '+code+'...','info');
   P2P.onConnected(info=>{
     roomState.code=info.roomCode; roomState.isHost=false;
@@ -372,6 +392,7 @@ function handleMsg(data,fromPeerId){
     case 'HOST_MUTE_ALL':     Voice.setAllOutputMuted(data.muted); toast(data.muted?'الصوت أُوقف من المضيف':'الصوت مُفعَّل','info'); break;
     case 'CHAT_MSG':          onChatMsg(data,fromPeerId); break;
     case 'CHAT_TOGGLE':       chatEnabled=data.enabled; toast(data.enabled?'💬 الدردشة مُفعَّلة':'💬 الدردشة موقوفة','info'); break;
+    case 'HOST_CLOSING':      onHostClosing(); break;
   }
 }
 function handlePeerLeave(peerId){
@@ -404,6 +425,7 @@ function onJoinAccepted(data){
   roomState={...roomState,...data.roomState};
   const me={...buildPlayerInfo(),peerId:P2P.getMyId(),team:null,wantBoss:false,micMuted:true};
   if(!roomState.players.find(p=>p.name===localPlayer.name)) roomState.players.push(me);
+  _enterRoom();
   showLobby(); toast('تم الانضمام! 🎉','success');
 }
 function onPlayerJoined(data){
@@ -442,14 +464,15 @@ function onMicStatus(data){
   const gp=gameState?.players.find(p=>p.name===data.name); if(gp) gp.micMuted=data.muted;
 }
 async function enableVoice(){
+  Voice.init(P2P._getPeer?.());
+  Voice.onStatus(()=>updateHud());
   const ok=await Voice.requestMic();
   if(ok){
-    Voice.init(P2P._getPeer?.());
-    Voice.onStatus(()=>updateHud());
     roomState.players.forEach(p=>{if(p.peerId&&p.peerId!==P2P.getMyId()) Voice.callPeer(p.peerId);});
     const btn=document.getElementById('mic-enable-btn');
     if(btn){btn.textContent='✓ مُفعَّل';btn.className='btn btn-sm btn-green';btn.disabled=true;}
     toast('تم تفعيل المايك! 🎤','success');
+    if(igOpen) buildIgSettings();
   } else toast('لم يُسمح بالمايك. تحقق من إعدادات المتصفح.','error');
 }
 function toggleMyMic(enabled){ Voice.setMicMuted(!enabled); broadcastMicStatus(!enabled); }
@@ -554,10 +577,21 @@ function copyInvite(){
   }); Audio.play('click');
 }
 function backToMenu(){
-  Audio.play('click'); P2P.disconnect(); Voice.disconnect();
+  Audio.play('click');
+  if(roomState.isHost) P2P.broadcast({type:'HOST_CLOSING'});
+  _exitRoom();
+  P2P.disconnect(); Voice.disconnect();
   gameState=null; logEntries=[];
   roomState={code:'',isHost:false,players:[],settings:{mode:'team',gridSize:25,maxPlayers:10,password:'',isPublic:true}};
   showMainMenu();
+}
+function onHostClosing(){
+  toast('انتهت الغرفة — المضيف غادر','error');
+  _exitRoom();
+  P2P.disconnect(); Voice.disconnect();
+  gameState=null; logEntries=[];
+  roomState={code:'',isHost:false,players:[],settings:{mode:'team',gridSize:25,maxPlayers:10,password:'',isPublic:true}};
+  setTimeout(()=>showMainMenu(),1200);
 }
 
 // ══════════════════════════════════════════════════════
@@ -685,12 +719,12 @@ function renderTopbar(){
     <div class="tb-left"><button class="btn btn-sm btn-black" onclick="leaveGame()">✕ خروج</button></div>
     <div class="tb-center">${centerHtml}</div>
     <div class="tb-right">
-      ${roomState.isHost?`<button class="btn btn-sm btn-white" id="host-mute-toggle" onclick="toggleHostMute()" title="كتم/إلغاء الصوت للكل">🔇</button>`:''}
-      <button class="btn btn-sm btn-white btn-icon" onclick="toggleIngameSettings()" title="إعدادات">⚙️</button>
+      ${roomState.isHost?`<button class="btn btn-sm btn-white" id="host-mute-toggle" onclick="toggleHostMute()" title="كتم/إلغاء الصوت للكل">${_hostMuted?SVG.volBtn:SVG.muteBtn}</button>`:''}
+      <button class="btn btn-sm btn-white btn-icon" onclick="toggleIngameSettings()" title="إعدادات">${SVG.gear}</button>
     </div>`;
 }
 let _hostMuted=false;
-function toggleHostMute(){ _hostMuted=!_hostMuted; hostMuteAll(_hostMuted); const btn=document.getElementById('host-mute-toggle'); if(btn) btn.textContent=_hostMuted?'🔊':'🔇'; }
+function toggleHostMute(){ _hostMuted=!_hostMuted; hostMuteAll(_hostMuted); const btn=document.getElementById('host-mute-toggle'); if(btn) btn.innerHTML=_hostMuted?SVG.volBtn:SVG.muteBtn; }
 
 /* ── RIGHT PANEL ── */
 function renderRightPanel(){
@@ -813,7 +847,6 @@ function makeCard(card,isBoss){
   const isPending=card.pendingBy===localPlayer.name;
   const isActive=amIActive();
 
-  // Word text color: dark on light cards, darker-dark on white box
   div.innerHTML=`
     <div class="card-img-bg"></div>
     <div class="card-frame"></div>
@@ -822,6 +855,12 @@ function makeCard(card,isBoss){
     ${isPending&&!card.revealed?`<div class="card-confirm-btn" onclick="confirmCard(event,${card.id})"><svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2.5"><polyline points="2,8 6,12 14,4"/></svg></div>`:''}
     ${card.hoveredBy&&card.hoveredBy!==localPlayer.name&&!card.revealed?`<div class="card-hover-ind">${avatarEl(gameState.players.find(p=>p.name===card.hoveredBy)||{},'avatar-micro')}</div>`:''}
   `;
+  // Dynamic font-size based on word length
+  const wordSpan=div.querySelector('.card-word');
+  if(wordSpan&&card.word){
+    const len=card.word.length;
+    wordSpan.style.fontSize=len<=3?'1.15rem':len<=5?'0.92rem':len<=7?'0.76rem':len<=10?'0.62rem':'0.50rem';
+  }
 
   if(!card.revealed){
     // Boss in solo mode cannot click the black card
@@ -894,7 +933,7 @@ function renderSoloStrip(){
     return `<div class="spb${isElim?' spb-elim':''}${isMe?' spb-me':''}" title="${esc(p.name)}">
       <div class="spb-av-wrap">${avatarEl(p,'')}${lvBadge(p.xp||0)}</div>
       <div class="spb-name">${esc(p.name.split(' ')[0])}</div>
-      ${isElim?'<div class="spb-badge badge-elim">💀</div>':isBoss?'<div class="spb-badge badge-boss">👑</div>':isBlocked?'<div class="spb-badge badge-blocked">⏸</div>':''}
+      ${isElim?`<div class="spb-badge badge-elim">${SVG.skull}</div>`:isBoss?`<div class="spb-badge badge-boss">${SVG.crown}</div>`:isBlocked?`<div class="spb-badge badge-blocked">${SVG.pause}</div>`:''}
       ${!isBoss?`<div class="spb-pts" style="color:${pts<0?'#ef4444':pts>0?'#22c55e':'#888'}">${pts>0?'+':''}${pts}</div>`:''}
     </div>`;
   }).join('');
@@ -906,7 +945,7 @@ function renderSoloStrip(){
 function showHintAnnounce(hint){
   const old=document.getElementById('hint-announce-overlay'); if(old) old.remove();
   const div=document.createElement('div'); div.id='hint-announce-overlay'; div.className='hint-announce-overlay';
-  div.innerHTML=`<div class="ha-box"><div class="ha-label">✨ تلميح جديد</div><div class="ha-word">${esc(hint.text)}</div><div class="ha-count">${hint.count} بطاقة</div><div class="ha-boss">من: ${esc(hint.bossName||'')}</div></div>`;
+  div.innerHTML=`<div class="ha-box"><div class="ha-label">${SVG.sparkle} تلميح جديد</div><div class="ha-word">${esc(hint.text)}</div><div class="ha-count">${hint.count} بطاقة</div><div class="ha-boss">من: ${esc(hint.bossName||'')}</div></div>`;
   div.onclick=()=>div.remove();
   document.body.appendChild(div);
   setTimeout(()=>{ if(div.parentNode) div.remove(); },3500);
@@ -964,22 +1003,31 @@ function renderBossArea(){
     (isBoss&&gameState.mode==='solo'&&(gameState.phase==='boss_selecting'||gameState.phase==='boss_hinting'));
 
   const selWords=(gameState.bossSelected||[]).map(id=>gameState.cards[id]?.word).filter(Boolean);
+  const showEndTurnBtn=gameState.mode==='solo'&&gameState.phase==='players_guessing';
 
   area.innerHTML=`
-    ${gameState.mode==='solo'&&canHint&&selWords.length?`<div class="boss-sel-words">💡 البطاقات المختارة: ${selWords.map(w=>`<b>${esc(w)}</b>`).join('، ')}</div>`:''}
+    ${gameState.mode==='solo'&&canHint&&selWords.length?`<div class="boss-sel-words">${SVG.bulb} البطاقات المختارة: ${selWords.map(w=>`<b>${esc(w)}</b>`).join('، ')}</div>`:''}
     ${gameState.mode==='solo'&&canHint&&!selWords.length?`<div class="boss-sel-words" style="color:var(--muted)">اضغط على البطاقات لتحديد الأهداف...</div>`:''}
-    <div class="boss-input-row">
+    ${showEndTurnBtn?`<div class="boss-input-row" style="justify-content:center;margin-bottom:2px">
+      <button class="btn btn-green btn-lg" onclick="endMyTurn()" style="gap:6px;flex:1">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        إنهاء الدور
+      </button>
+    </div>`:''}
+    ${canHint||!showEndTurnBtn?`<div class="boss-input-row">
       <input type="text" class="hint-txt" id="hint-txt" placeholder="${canHint?'اكتب تلميحاً (كلمة واحدة)...':'انتظر دورك...'}" ${canHint?'':'disabled'} autocomplete="off" onkeydown="if(event.key==='Enter')submitHint()">
-      <input type="number" class="hint-cnt" id="hint-count" min="1" max="9" value="1" ${canHint?'':'disabled'} oninput="this.value=Math.min(9,Math.max(1,parseInt(this.value)||1))">
-      <button class="btn btn-yellow" onclick="submitHint()" ${canHint?'':'disabled'}>📤 إرسال</button>
-    </div>`;
+      <select class="hint-cnt" id="hint-count" ${canHint?'':'disabled'}>
+        ${[1,2,3,4,5,6,7,8,9].map(n=>`<option value="${n}">×${n}</option>`).join('')}
+      </select>
+      <button class="btn btn-yellow" onclick="submitHint()" ${canHint?'':'disabled'} style="display:flex;align-items:center;gap:5px">${SVG.send} إرسال</button>
+    </div>`:''}`;
 }
 
 function updateBossSelWords(){
   if(!gameState||myRole!=='boss') return;
   const sel=(gameState.bossSelected||[]).map(id=>gameState.cards[id]?.word).filter(Boolean);
   const el=document.querySelector('.boss-sel-words');
-  if(el) el.innerHTML=sel.length?`💡 البطاقات المختارة: ${sel.map(w=>`<b>${esc(w)}</b>`).join('، ')}`:` <span style="color:var(--muted)">اضغط على البطاقات لتحديد الأهداف...</span>`;
+  if(el) el.innerHTML=sel.length?`${SVG.bulb} البطاقات المختارة: ${sel.map(w=>`<b>${esc(w)}</b>`).join('، ')}`:` <span style="color:var(--muted)">اضغط على البطاقات لتحديد الأهداف...</span>`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -1159,14 +1207,14 @@ function buildIgSettings(){
   const p=document.getElementById('ig-settings-panel'); if(!p) return;
   const s=Audio.getSettings(); const mic=Voice.getMicMuted(); const micA=Voice.isAvailable();
   p.innerHTML=`
-    <div class="igs-title">⚙️ إعدادات <span style="cursor:pointer" onclick="toggleIngameSettings()">✕</span></div>
+    <div class="igs-title" style="display:flex;align-items:center;gap:6px">${SVG.gear} إعدادات <span style="cursor:pointer;margin-right:auto" onclick="toggleIngameSettings()">✕</span></div>
     <div class="igs-row"><span>الأصوات</span><label class="toggle-switch"><input type="checkbox" ${s.sfxEnabled?'checked':''} onchange="Audio.setSfxEnabled(this.checked)"><span class="toggle-slider"></span></label></div>
     <div class="igs-row"><span>مستوى الصوت</span><div style="display:flex;gap:5px;align-items:center"><input type="range" min="0" max="100" value="${Math.round(s.sfxVolume*100)}" style="flex:1;height:4px" oninput="Audio.setSfxVolume(this.value/100)"><span style="font-size:.7rem;min-width:28px">${Math.round(s.sfxVolume*100)}%</span></div></div>
     ${micA?`<div class="igs-row"><span>المايك</span><label class="toggle-switch"><input type="checkbox" ${!mic?'checked':''} onchange="toggleMyMic(this.checked)"><span class="toggle-slider"></span></label></div>`:
       `<div class="igs-row"><span>المايك</span><button class="btn btn-sm btn-blue" onclick="enableVoice();toggleIngameSettings()">تفعيل</button></div>`}
-    ${roomState.isHost?`<div class="igs-row"><span>🔇 كتم جميع الميكات</span><label class="toggle-switch"><input type="checkbox" ${_hostMuted?'checked':''} onchange="hostMuteAll(this.checked);_hostMuted=this.checked"><span class="toggle-slider"></span></label></div>`:''}
-    ${roomState.isHost?`<div class="igs-row"><span>💬 الدردشة</span><label class="toggle-switch"><input type="checkbox" ${chatEnabled?'checked':''} onchange="hostToggleChat(this.checked)"><span class="toggle-slider"></span></label></div>`:''}
-    ${gameState?`<div style="font-size:.72rem;font-weight:700;margin:8px 0 4px">🎚 صوت اللاعبين</div>${gameState.players.filter(p=>p.name!==localPlayer.name).map(p=>`<div class="igs-peer-row">${avatarEl(p,'avatar-micro')}<span style="flex:1;font-size:.72rem">${esc(p.name)}</span><input type="range" min="0" max="100" value="${Math.round(Voice.getPeerVolume(p.peerId)*100)}" style="width:70px;height:4px" oninput="Voice.setPeerVolume('${esc(p.peerId||'')}',this.value/100)"></div>`).join('')}`:''}`;
+    ${roomState.isHost?`<div class="igs-row"><span style="display:flex;align-items:center;gap:5px">${SVG.muteBtn} كتم جميع الميكات</span><label class="toggle-switch"><input type="checkbox" ${_hostMuted?'checked':''} onchange="hostMuteAll(this.checked);_hostMuted=this.checked"><span class="toggle-slider"></span></label></div>`:''}
+    ${roomState.isHost?`<div class="igs-row"><span style="display:flex;align-items:center;gap:5px">${SVG.chat} الدردشة</span><label class="toggle-switch"><input type="checkbox" ${chatEnabled?'checked':''} onchange="hostToggleChat(this.checked)"><span class="toggle-slider"></span></label></div>`:''}
+    ${gameState?`<div style="font-size:.72rem;font-weight:700;margin:8px 0 4px;display:flex;align-items:center;gap:5px">${SVG.speaker} صوت اللاعبين</div>${gameState.players.filter(p=>p.name!==localPlayer.name).map(p=>`<div class="igs-peer-row">${avatarEl(p,'avatar-micro')}<span style="flex:1;font-size:.72rem">${esc(p.name)}</span><input type="range" min="0" max="100" value="${Math.round(Voice.getPeerVolume(p.peerId)*100)}" style="width:70px;height:4px" oninput="Voice.setPeerVolume('${esc(p.peerId||'')}',this.value/100)"></div>`).join('')}`:''}`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -1178,7 +1226,7 @@ function togglePeerMute(peerId,btn){
   _mutedPeers[peerId]=!_mutedPeers[peerId];
   const muted=_mutedPeers[peerId];
   Voice.setPeerVolume(peerId, muted?0:1);
-  if(btn) btn.textContent=muted?'🔇':'🔊';
+  if(btn) btn.innerHTML=muted?SVG.muteBtn:SVG.volBtn;
 }
 function hostToggleChat(enabled){
   if(!roomState.isHost) return;
@@ -1293,7 +1341,11 @@ function showGameOver(winner,xpGain){
     sub=winner===localPlayer.name?'أحسنت!':'الفوز في المرة القادمة';
   }
   const sorted=[...gameState.players].sort((a,b)=>(gameState.scores[b.name]||0)-(gameState.scores[a.name]||0));
-  const medals=['🥇','🥈','🥉'];
+  const medals=[
+    `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#FFD700;color:#1a1a1a;font-weight:900;font-size:.72rem;flex-shrink:0">1</span>`,
+    `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#C0C0C0;color:#1a1a1a;font-weight:900;font-size:.72rem;flex-shrink:0">2</span>`,
+    `<span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#CD7F32;color:#fff;font-weight:900;font-size:.72rem;flex-shrink:0">3</span>`,
+  ];
   box.innerHTML=`
     <div class="go-emoji">${iconHtml}</div>
     <div class="go-title">${title}</div>
@@ -1320,7 +1372,7 @@ function showGameOver(winner,xpGain){
     </div>`;
 }
 function goLobby(){ Audio.play('click'); gameState=null; logEntries=[]; showLobby(); }
-function leaveGame(){ Audio.play('click'); P2P.disconnect(); Voice.disconnect(); gameState=null; logEntries=[]; showMainMenu(); }
+function leaveGame(){ Audio.play('click'); gameState=null; logEntries=[]; showLobby(); }
 
 // ══════════════════════════════════════════════════════
 //  PROFILE MODAL
@@ -1359,14 +1411,20 @@ function openProfileModal(){
       <label class="input-label">تغيير الصورة</label>
       <div class="avatar-options" id="prof-avatar-opts"></div>
     </div>
-    <div style="font-weight:900;font-size:.88rem;color:var(--black);margin:16px 0 8px;padding-bottom:6px;border-bottom:var(--border)">🏆 جدول المستويات</div>
+    <div style="font-weight:900;font-size:.88rem;color:var(--black);margin:16px 0 8px;padding-bottom:6px;border-bottom:var(--border);display:flex;align-items:center;gap:6px">${SVG.trophy} جدول المستويات</div>
     <div class="lvl-table">${levHtml}</div>`;
   document.getElementById('modal-profile').classList.add('open');
   setTimeout(()=>{ renderAvatarPicker('prof-avatar-opts',id=>{localPlayer.avatarId=id;saveProfile();updateHud();}); },60);
 }
 function saveProfileEdits(){
   const n=document.getElementById('prof-edit-name')?.value.trim();
-  if(n&&n.length<=20){localPlayer.name=n;saveProfile();updateHud();}
+  if(n){
+    if(!/^[\u0600-\u06FFa-zA-Z\s]+$/.test(n)){toast('الاسم يجب أن يحتوي أحرف عربية أو إنجليزية فقط','error');return;}
+    const letters=n.replace(/\s/g,'');
+    if(letters.length<3){toast('الاسم يجب أن يحتوي على 3 أحرف على الأقل','error');return;}
+    if(n.length>20){toast('الاسم طويل جداً (20 حرف كحد أقصى)','error');return;}
+    localPlayer.name=n;saveProfile();updateHud();
+  }
   document.getElementById('modal-profile').classList.remove('open');
   toast('تم الحفظ','success');
 }
@@ -1401,11 +1459,88 @@ function applyLobbySettings(){
 }
 
 // ══════════════════════════════════════════════════════
+//  MULTI-TAB PROTECTION
+// ══════════════════════════════════════════════════════
+const _myTabId=Math.random().toString(36).slice(2);
+const _TAB_LOCK_KEY='4mycn_active_tab';
+function _enterRoom(){
+  localStorage.setItem(_TAB_LOCK_KEY,JSON.stringify({tabId:_myTabId,name:localPlayer?.name,ts:Date.now()}));
+}
+function _exitRoom(){
+  try{const d=JSON.parse(localStorage.getItem(_TAB_LOCK_KEY)||'{}');if(d.tabId===_myTabId)localStorage.removeItem(_TAB_LOCK_KEY);}catch(e){}
+}
+function _checkDuplicateTab(){
+  try{
+    const d=JSON.parse(localStorage.getItem(_TAB_LOCK_KEY)||'{}');
+    if(d.name===localPlayer?.name&&d.tabId!==_myTabId&&Date.now()-d.ts<90000) return true;
+  }catch(e){}
+  return false;
+}
+
+// ══════════════════════════════════════════════════════
+//  DRAGGABLE FABs
+// ══════════════════════════════════════════════════════
+function makeDraggable(el){
+  let dragging=false,startX,startY,startL,startB,hasMoved=false;
+  const onDown=e=>{
+    if(e.target.closest('.modal-overlay')) return;
+    dragging=true; hasMoved=false;
+    const ptr=e.touches?e.touches[0]:e;
+    startX=ptr.clientX; startY=ptr.clientY;
+    const r=el.getBoundingClientRect();
+    startL=r.left;
+    startB=window.innerHeight-r.bottom;
+    el.classList.add('fab-dragging');
+    e.preventDefault();
+  };
+  const onMove=e=>{
+    if(!dragging) return;
+    const ptr=e.touches?e.touches[0]:e;
+    const dx=ptr.clientX-startX, dy=ptr.clientY-startY;
+    if(Math.abs(dx)>4||Math.abs(dy)>4) hasMoved=true;
+    const newL=Math.max(4,Math.min(window.innerWidth-60,startL+dx));
+    const newB=Math.max(4,Math.min(window.innerHeight-60,startB-dy));
+    el.style.left=newL+'px'; el.style.bottom=newB+'px'; el.style.right='auto';
+    e.preventDefault();
+  };
+  const onUp=e=>{
+    if(!dragging) return;
+    dragging=false;
+    el.classList.remove('fab-dragging');
+    if(hasMoved) e.stopPropagation();
+  };
+  el.addEventListener('mousedown',onDown);
+  el.addEventListener('touchstart',onDown,{passive:false});
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('mouseup',onUp);
+  document.addEventListener('touchend',onUp);
+}
+
+// ══════════════════════════════════════════════════════
+//  DEVELOPER CARD MODAL
+// ══════════════════════════════════════════════════════
+function openDevCard(){
+  const m=document.getElementById('modal-devcard');
+  if(m) m.classList.add('open');
+}
+function closeDevCard(){
+  const m=document.getElementById('modal-devcard');
+  if(m) m.classList.remove('open');
+}
+
+// ══════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════
 function init(){
   Audio.init();
+  window.addEventListener('beforeunload',_exitRoom);
   if(loadProfile()) showMainMenu();
   else showOnboarding();
+  // Draggable FABs
+  const fabLog=document.getElementById('fab-log');
+  const fabChat=document.getElementById('fab-chat');
+  if(fabLog) makeDraggable(fabLog);
+  if(fabChat) makeDraggable(fabChat);
 }
 document.addEventListener('DOMContentLoaded',init);
